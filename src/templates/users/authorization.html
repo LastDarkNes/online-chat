@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block content%}
+
+{% if not is_authenticated %}
+<form id="authorization_form" action="{{ action }}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="{{ button_value }}">
+</form>
+<p>{{a}}</p>
+{% else %}
+<h1>You already authenticated</h1>
+{% endif %}
+
+
+{% endblock %}

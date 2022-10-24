@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block content%}
+{% for message in messages %}
+    <div class="{% if message.user == user%}userMessage{% else %}defaultMessage{% endif %}">
+      <p class="messagetext">{{ message.user.username }}</p>
+      <p class="messagetext">{{ message.text }}</p>
+      <p class="date">{{ message.date }}</p>
+    </div>
+
+{% endfor %}
+{% endblock %}
+
+{% block footer%}
+<footer>
+      <div id="formbg">
+        {% if is_authenticated %}
+        <form id="form" action="/" method="post">
+          {% csrf_token %}
+
+          <div id="nameform" >
+            </div>
+            <div id="messageform">
+              <textarea name="text" cols="80"></textarea>
+              <input id="submit" type="submit" name="" value="Send">
+            </div>
+          </form>
+        {% else %}
+        <h1>You need be authenticated to send messages</h1>
+        {% endif %}
+        </div>
+    </footer>
+{% endblock %}

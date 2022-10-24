@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Online chat</title>
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
+  </head>
+  <body>
+    <header>
+      <div id="headbar">
+        <a href="{% url "chat" %}" id="headerbutton">Online Chat</a>
+        {% if is_authenticated %}
+          <a class="headerButton" href="{% url "sign_out" %}">Sign out</a>
+        {% else %}
+          <a class="headerButton" href="{% url "sign_in" %}">Sign in</a>
+          <a class="headerButton" href="{% url "sign_up" %}">Sign up</a>
+        {% endif %}
+
+
+      </div>
+    </header>
+
+    <div class="chat">
+
+      {% block content%}
+
+      {% endblock %}
+        {% for i in messedges %}
+          <div class="message">
+          {% if i.author != '' %}
+          <p class="messagetext">{{ i.author_name }}</p>
+          {% endif %}
+          <p class="messagetext">{{ i.messedge_text }}</p>
+          <p class="date">{{ i.date }}</p>
+    </div>
+
+  {% endfor %}
+    </div>
+      {% block footer%}
+
+      {% endblock %}
+
+    </div>
+  </body>
+</html>
